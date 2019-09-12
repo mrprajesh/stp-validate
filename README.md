@@ -51,7 +51,7 @@ VALUE 20
 7 22
 ```
 
-The `20` is the size/cost of the Steiner tree and followed by edges -- one edge per line. The order of edges, and of the vertices in an edge should not matter.
+The `20` is the size/cost of the Steiner tree and followed by edges -- one edge per line. The order of the edges and of the vertices in an edge should not matter.
 
 ### Author
 [Rajesh Pandian M](http://mrprajesh.github.io)
