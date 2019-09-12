@@ -1,6 +1,14 @@
 # Prerequisites
 *.d
 
+# testcase dirs
+t1
+t3
+
+# stp Object files
+stp-validate
+stp-validate.out
+
 # Compiled Object files
 *.slo
 *.lo
