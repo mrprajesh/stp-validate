@@ -53,4 +53,8 @@ VALUE 20
 
 The `20` is the size/cost of the Steiner tree and followed by edges -- one edge per line. The order of edges, and order of vertex in an edge should not matter.
 
+### Author
+[Rajesh Pandian M](http://mrprajesh.github.io)
 
+### Feedback
+If you see any mistake/logical error in the code. Please feel free to raise an [issue](https://github.com/mrprajesh/stp-validate/issues/new).
