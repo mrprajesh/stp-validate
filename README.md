@@ -7,7 +7,7 @@ Steiner Tree Problem's validation module written in C++.
 
 ### Modules
 
-- [ ] Check sum of edges cost = Steiner tree cost
+- [ ] Check sum of edge cost printed = Steiner tree cost/Printed VALUE
 - [ ] Is the edges printed is a valid edge in G
 - [ ] Is all terminals present?
 - [ ] is T connected?
