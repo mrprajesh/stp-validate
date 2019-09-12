@@ -2,7 +2,7 @@
 Steiner Tree Problem's validation module written in C++.
 
 ### STP and notations.
-- **Input: ** `G(V,E,W,L)` where $W:E → Z^+ $ and L is terminals.
+- **Input:** `G(V,E,W,L)` where $W:E → Z^+ $ and L is terminals.
 - **Output:** `T(V',E',W)` such that V'⊇ L.
 
 ### Modules
@@ -12,10 +12,12 @@ Steiner Tree Problem's validation module written in C++.
 - [ ] Is all terminals present?
 - [ ] is T connected?
 - [ ] is T a tree?
+- [ ] is the above 3 conditions for valid Steiner Tree.
 
 ### Input and output
-This IO follows the standard [DIMACS](http://dimacs11.zib.de/downloads.html#stpg) format / [PACE challenge](https://pacechallenge.org/2018/steiner-tree/#appendix-a-graph-format) format 
-or even SteinLib's [format](http://steinlib.zib.de/format.php)
+This IO format follows the standard [DIMACS](http://dimacs11.zib.de/downloads.html#stpg) format / [PACE challenge](https://pacechallenge.org/2018/steiner-tree/#appendix-a-graph-format) format 
+or even SteinLib's [format](http://steinlib.zib.de/format.php). 
+
 The sample input as from PACE
 
 ```
@@ -49,6 +51,6 @@ VALUE 20
 7 22
 ```
 
-The `20` is the size/cost of the Steiner tree and followed by edges -- one edge per line. The order does not matter.
+The `20` is the size/cost of the Steiner tree and followed by edges -- one edge per line. The order of edges, and order of vertex in an edge should not matter.
 
 
