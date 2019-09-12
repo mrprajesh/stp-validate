@@ -2,8 +2,8 @@
 Steiner Tree Problem's validation module written in C++.
 
 ### STP and notations.
-- **Input:** `G(V,E,W,L)` where $W:E → Z^+ $ and L is terminals.
-- **Output:** `T(V',E',W)` such that V'⊇ L.
+- **Input:** `G(V,E,W,L)` where `W:E → Z+` and `L` is terminals.
+- **Output:** `T(V',E',W)` such that `V'⊇ L`.
 
 ### Modules
 
