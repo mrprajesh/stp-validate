@@ -102,6 +102,14 @@ bool isTreeWeightAreSame(map<pair<int,int> , int> &W, vector<pair<int,int>> tree
 	return true;
 }
 
+bool isAllTerminalsPresent(set <int> terminalSet, set<pair<int,bool>> nodes){
+	for(auto a : terminalSet){
+		if(nodes.find(make_pair(a,false)) == nodes.end() ) // a terminal not found
+			return false;
+	}
+	return true;
+}
+
 int main(int argc, char **argv) {
 	ios_base::sync_with_stdio(false);
 	
@@ -204,15 +212,14 @@ int main(int argc, char **argv) {
 	}
 	
 	if(treeEdges.size() != nodes.size()-1 )
-		cout << "Mismatch; n != m -1" << endl;
+		printf("Mismatch; n-1 != m i.e %ld -1 != %ld\n", nodes.size(), treeEdges.size() );
 	if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
 		cout << "Mismatch; Sum Edge Weights printed != VALUE" << endl;
-	else
-		cout << "ALL Fine" << endl;
-	/*
-	if( ! isAllTerminalsPresent( //TODO ))
-		cout << "Missing: all terminals" << endl;
 	
+	if( ! isAllTerminalsPresent(terminalSet,nodes))
+		cout << "Missing: Not all terminals present" << endl;
+	
+	/*
 	if( ! isConnected(/// TODO ))
 		cout << "Mismatch; Disconnected" << endl;
 	*/	
