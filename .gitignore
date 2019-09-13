@@ -4,6 +4,8 @@
 # testcase dirs
 t1
 t3
+*.gr
+*.gr
 
 # stp Object files
 stp-validate
