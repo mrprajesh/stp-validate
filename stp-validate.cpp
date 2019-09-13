@@ -5,8 +5,7 @@
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * the Free Software Foundation; either version 3 of the License.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -56,6 +55,32 @@ public:
 	}
 };
 
+void DFS(vector< vector<Edge> > &graph, int u){
+	
+}
+
+bool isConnected(vector< vector<Edge> > &graph, set<int> &nodes, int n){
+	
+	for(auto v : nodes)
+		//~ if( v == v) //v.visited == false
+			DFS(graph, v);	
+	
+		
+	return true;
+}
+
+bool isTreeWeightAreSame(map<pair<int,int> , int> &W, vector<pair<int,int>> treeEdges, long long int stpVal){
+	long long int computedVal = 0;
+	
+	for(auto edge : treeEdges){
+		int u = edge.first ;
+		int v = edge.second;
+		computedVal += W[make_pair(u,v)];
+	}
+	if(stpVal != computedVal)
+		return false;
+	return true;
+}
 
 int main(int argc, char **argv) {
 	ios_base::sync_with_stdio(false);
@@ -139,6 +164,29 @@ int main(int argc, char **argv) {
 			exit(1);
 		}
 	}
+	
+	int u, v;
+	long long int stpVal;
+	cin >> dummy >>  stpVal;
+	vector<pair<int,int>> treeEdges;
+	set<pair<int,bool>> nodes; // bool for dfs
+	while(cin >>  u >> v ){
+		treeEdges.push_back({u,v});
+		nodes.insert({u, false});
+		nodes.insert({v, false});
+	}
+	
+	if(treeEdges.size() != nodes.size()-1 )
+		cout << "Mismatch; n != m -1" << endl;
+	if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
+		cout << "Mismatch; Sum Edge Weights printed != VALUE" << endl;
+	/*
+	if( ! isAllTerminalsPresent( //TODO ))
+		cout << "Missing: all terminals" << endl;
+	
+	if( ! isConnected(/// TODO ))
+		cout << "Mismatch; Disconnected" << endl;
+	*/	
 	
 	return 0;
 }
