@@ -55,6 +55,26 @@ public:
 	}
 };
 
+
+class Arg{
+public:
+	bool isEdgesToPrint;
+	
+	Arg(){
+		isEdgesToPrint= false;
+	}
+	
+	Arg(int options){
+		switch(options){
+			case 1:
+				isEdgesToPrint = true;
+		}
+	}
+	
+	~Arg(){}
+	
+};
+
 void DFS(vector< vector<Edge> > &graph, int u){
 	
 }
@@ -158,6 +178,10 @@ int main(int argc, char **argv) {
 			**/
 			
 		}
+		else if( code == "EOF"){
+			// last line EOF and VALUE is also consumed
+			break;
+		}
 		else{
 			cout << "Err in Input/Parsing!" << endl;
 			cout <<  "Code: " << code << endl;
@@ -165,12 +189,15 @@ int main(int argc, char **argv) {
 		}
 	}
 	
+	
 	int u, v;
 	long long int stpVal;
-	cin >> dummy >>  stpVal;
+	cin >>  stpVal;
+	
 	vector<pair<int,int>> treeEdges;
-	set<pair<int,bool>> nodes; // bool for dfs
+	set<pair<int,bool>> nodes; // bool is for dfs in mind
 	while(cin >>  u >> v ){
+		//~ printf("%d %d\n",u, v);
 		treeEdges.push_back({u,v});
 		nodes.insert({u, false});
 		nodes.insert({v, false});
@@ -180,6 +207,8 @@ int main(int argc, char **argv) {
 		cout << "Mismatch; n != m -1" << endl;
 	if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
 		cout << "Mismatch; Sum Edge Weights printed != VALUE" << endl;
+	else
+		cout << "ALL Fine" << endl;
 	/*
 	if( ! isAllTerminalsPresent( //TODO ))
 		cout << "Missing: all terminals" << endl;
