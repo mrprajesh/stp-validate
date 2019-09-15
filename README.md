@@ -7,12 +7,12 @@ Steiner Tree Problem's validation module written in C++.
 
 ### Modules
 
-- [ ] Check sum of edge cost printed = Steiner tree cost/Printed VALUE
-- [ ] Is the edges printed is a valid edge in G
-- [ ] Is all terminals present?
-- [ ] is T connected?
-- [ ] is T a tree?
-- [ ] is the above 3 conditions for valid Steiner Tree.
+- [x] Check sum of edge cost printed = Steiner tree cost/Printed VALUE
+- [x] Is the edges printed is a valid edge in G
+- [x] Is all terminals present?
+- [x] is T connected?
+- [x] is T a tree?
+- [x] the last 3 conditions is for valid Steiner Tree.
 
 ### Input and output
 This IO format follows the standard [DIMACS](http://dimacs11.zib.de/downloads.html#stpg) format / [PACE challenge](https://pacechallenge.org/2018/steiner-tree/#appendix-a-graph-format) format 
