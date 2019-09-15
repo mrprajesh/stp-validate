@@ -279,7 +279,7 @@ int main(int argc, char **argv) {
 	if( ! isConnected(treeNodes, treeEdges, terminalSet))
 		cout << "WRONG: Disconnected!" << endl;
 	
-	
+	cout << "All tests - done!"<< endl;
 	return 0;
 }
 

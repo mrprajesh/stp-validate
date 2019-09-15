@@ -5,6 +5,22 @@ Steiner Tree Problem's validation module written in C++.
 - **Input:** Graph `G(V,E,W,L)` where integeral edge weights `W:E → Z+` and `L` is terminals.
 - **Output:** Tree `T(V',E',W)` such that `V'⊇ L`.
 
+### How to run/use/test
+
+- Build it using `make`
+- How to test (Given input gr and output txt file)
+
+```
+cat instance001.gr output001.txt | ./stp-validate
+```
+
+- For batch testing edit the testcase input/output DIR in `Makefile`.
+- `make test` does it for you
+
+#### Todo
+- [x] Make
+- [ ] do batch testing
+
 ### Modules
 
 - [x] Check sum of edge cost printed = Steiner tree cost/Printed VALUE
