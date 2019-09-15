@@ -38,6 +38,7 @@
 #include <map> // for  map
 #include <queue> // for  queue
 
+#define DEFAULT -12345679
 using namespace std;
 
 class Edge { 
@@ -75,13 +76,13 @@ public:
 	
 };
 
-void DFS(vector< vector<Edge> > &graph, int u){
+void DFS(unordered_map<int, vector<int>> &graph, int u){
 	
 }
 
-bool isConnected(vector< vector<Edge> > &graph, set<int> &nodes, int n){
-	
-	for(auto v : nodes)
+bool isConnected(set<int> &treeNodes, vector<pair<int,int>> &treeEdges, set<int> &terminalSet){
+	unordered_map<int, vector<int>> graph;
+	for(auto v : treeNodes)
 		//~ if( v == v) //v.visited == false
 			DFS(graph, v);	
 	
@@ -97,14 +98,15 @@ bool isTreeWeightAreSame(map<pair<int,int> , int> &W, vector<pair<int,int>> tree
 		int v = edge.second;
 		computedVal += W[make_pair(u,v)];
 	}
+	cout << W[make_pair(200,200)] << endl;
 	if(stpVal != computedVal)
 		return false;
 	return true;
 }
 
-bool isAllTerminalsPresent(set <int> terminalSet, set<pair<int,bool>> nodes){
-	for(auto a : terminalSet){
-		if(nodes.find(make_pair(a,false)) == nodes.end() ) // a terminal not found
+bool isAllTerminalsPresent(set <int> &terminalSet, set<int> &nodes){
+	for(auto  a : terminalSet){
+		if(nodes.find(a) == nodes.end() ) // a terminal not found
 			return false;
 	}
 	return true;
@@ -199,30 +201,32 @@ int main(int argc, char **argv) {
 	
 	
 	int u, v;
-	long long int stpVal;
+	long long int stpVal=-1;
 	cin >>  stpVal;
 	
 	vector<pair<int,int>> treeEdges;
-	set<pair<int,bool>> nodes; // bool is for dfs in mind
+	set<int> treeNodes; // bool is for dfs in mind
 	while(cin >>  u >> v ){
 		//~ printf("%d %d\n",u, v);
 		treeEdges.push_back({u,v});
-		nodes.insert({u, false});
-		nodes.insert({v, false});
+		treeNodes.insert({u});
+		treeNodes.insert({v});
 	}
-	
-	if(treeEdges.size() != nodes.size()-1 )
-		printf("Mismatch; n-1 != m i.e %ld -1 != %ld\n", nodes.size(), treeEdges.size() );
+	if(stpVal == -1)
+		cout << "WRONG: No VALUE" << endl;
+	if(treeEdges.size() == 0)
+		cout << "WRONG: No edges printed!" << endl;
+	if(treeEdges.size() != treeNodes.size()-1 )
+		printf("WRONG: Mismatch; n-1 != m i.e %ld -1 != %ld\n", treeNodes.size(), treeEdges.size() );
 	if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
-		cout << "Mismatch; Sum Edge Weights printed != VALUE" << endl;
+		cout << "WRONG: Mismatch; Sum Edge Weights printed != VALUE" << endl;
 	
-	if( ! isAllTerminalsPresent(terminalSet,nodes))
-		cout << "Missing: Not all terminals present" << endl;
+	if( ! isAllTerminalsPresent(terminalSet,treeNodes))
+		cout << "WRONG: Missing; Not all terminals present" << endl;
 	
-	/*
-	if( ! isConnected(/// TODO ))
-		cout << "Mismatch; Disconnected" << endl;
-	*/	
+	if( ! isConnected(treeNodes, treeEdges, terminalSet))
+		cout << "WRONG: Mismatch; Disconnected" << endl;
+	
 	
 	return 0;
 }
