@@ -38,8 +38,15 @@
 #include <map> // for  map
 #include <queue> // for  queue
 
-#define DEFAULT -12345679
+#define DEFAULT -1234567890
+
 using namespace std;
+
+int LEVEL = 0;
+// 1 -- prints debug lines 
+// 0 -- submission level
+
+#define DEBUG if(LEVEL)	 
 
 class Edge { 
 public:
@@ -76,30 +83,69 @@ public:
 	
 };
 
-void DFS(unordered_map<int, vector<int>> &graph, int u){
-	
+void DFS(unordered_map<int, vector<int>> &graph, unordered_map<int, bool> &visited, int u){
+	visited[u]= true;
+	for(auto v : graph[u]){
+		if(visited[v] == false)
+			DFS(graph, visited, v);
+	}
 }
 
 bool isConnected(set<int> &treeNodes, vector<pair<int,int>> &treeEdges, set<int> &terminalSet){
-	unordered_map<int, vector<int>> graph;
-	for(auto v : treeNodes)
-		//~ if( v == v) //v.visited == false
-			DFS(graph, v);	
 	
-		
+	unordered_map<int, vector<int>> graph; 	// adj list 
+	unordered_map<int, bool> visited; 		// visited array
+	
+	vector<int> empty; // initialize
+	for(auto node: treeNodes){
+		graph[node]= empty;
+		visited[node]=false;
+	}
+	for(auto edge : treeEdges){
+		int u = edge.first;
+		int v = edge.second;	
+		graph[u].push_back(v);
+		graph[v].push_back(u);
+	}	
+	
+	DEBUG cout << "PRINTING TREE" << endl;
+	DEBUG 
+	for(auto list: graph) {
+		cout << list.first << ": ";
+		for(auto v : list.second)
+			cout << v << " ";
+		cout << endl;	
+	}
+	
+	int start = *terminalSet.begin(); //  to get first terminal.
+	
+	DFS(graph, visited, start);
+	
+	// Checks if at least one of the tree node is not visited; 
+	// if so T is disconnected 
+	for(auto node: treeNodes){ 
+		if(visited[node]==false)
+			return false;
+	}
+	
 	return true;
 }
 
 bool isTreeWeightAreSame(map<pair<int,int> , int> &W, vector<pair<int,int>> treeEdges, long long int stpVal){
-	long long int computedVal = 0;
+	long long int computedStpVal = 0;
 	
 	for(auto edge : treeEdges){
 		int u = edge.first ;
 		int v = edge.second;
-		computedVal += W[make_pair(u,v)];
+		if(W.find({u,v}) != W.end())
+			computedStpVal += W[make_pair(u,v)];
+		else{
+			cout<< "WRONG: Non Existing Edge of G in T"<< endl;
+			return false;
+		}
 	}
-	cout << W[make_pair(200,200)] << endl;
-	if(stpVal != computedVal)
+
+	if(stpVal != computedStpVal)
 		return false;
 	return true;
 }
@@ -152,8 +198,8 @@ int main(int argc, char **argv) {
 			cin >> dummy >> ws;
 		}
 		else if(code == "SECTION" && type =="Tree"){
-			// Not NEEDED FOR STP -- commenting
-			
+			// Not NEEDED FOR STP -- commenting out 
+			// rajesh
 			/*
 			cin >> dummy >> ws; // DECOMP
 			cin >> dummy >> dummy; // s ,td
@@ -201,7 +247,7 @@ int main(int argc, char **argv) {
 	
 	
 	int u, v;
-	long long int stpVal=-1;
+	long long int stpVal= DEFAULT;
 	cin >>  stpVal;
 	
 	vector<pair<int,int>> treeEdges;
@@ -212,20 +258,26 @@ int main(int argc, char **argv) {
 		treeNodes.insert({u});
 		treeNodes.insert({v});
 	}
-	if(stpVal == -1)
-		cout << "WRONG: No VALUE" << endl;
+	
+	if(stpVal == DEFAULT )
+		cout << "WRONG: No VALUE Printed!" << endl;
+
 	if(treeEdges.size() == 0)
 		cout << "WRONG: No edges printed!" << endl;
-	if(treeEdges.size() != treeNodes.size()-1 )
-		printf("WRONG: Mismatch; n-1 != m i.e %ld -1 != %ld\n", treeNodes.size(), treeEdges.size() );
-	if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
-		cout << "WRONG: Mismatch; Sum Edge Weights printed != VALUE" << endl;
+
+	if(treeEdges.size() != treeNodes.size()-1 ){
+		cout << "WRONG: Mismatch; n-1 != m" << endl;
+		DEBUG printf("WRONG: Mismatch; n-1 != m i.e %ld -1 != %ld\n", treeNodes.size(), treeEdges.size() );
+	}
+	
+	//~ if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
+		//~ cout << "WRONG: Mismatch; Sum Edge Weights printed != VALUE" << endl;
 	
 	if( ! isAllTerminalsPresent(terminalSet,treeNodes))
 		cout << "WRONG: Missing; Not all terminals present" << endl;
 	
 	if( ! isConnected(treeNodes, treeEdges, terminalSet))
-		cout << "WRONG: Mismatch; Disconnected" << endl;
+		cout << "WRONG: Disconnected!" << endl;
 	
 	
 	return 0;
