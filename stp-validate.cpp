@@ -5,7 +5,7 @@
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License.
+ * the Free Software Foundation; version 3 of the License.
  * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -270,8 +270,8 @@ int main(int argc, char **argv) {
 		DEBUG printf("WRONG: Mismatch; n-1 != m i.e %ld -1 != %ld\n", treeNodes.size(), treeEdges.size() );
 	}
 	
-	//~ if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
-		//~ cout << "WRONG: Mismatch; Sum Edge Weights printed != VALUE" << endl;
+	if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
+		cout << "WRONG: Mismatch; Sum Edge Weights printed != VALUE" << endl;
 	
 	if( ! isAllTerminalsPresent(terminalSet,treeNodes))
 		cout << "WRONG: Missing; Not all terminals present" << endl;
