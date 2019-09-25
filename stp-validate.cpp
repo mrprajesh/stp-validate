@@ -134,12 +134,12 @@ bool isConnected(set<int> &treeNodes, vector<pair<int,int>> &treeEdges, set<int>
 bool isTreeWeightAreSame(map<pair<int,int> , int> &W, vector<pair<int,int>> treeEdges, long long int stpVal){
 	long long int computedStpVal = 0;
 	
-	for(auto edge : treeEdges){
+	for(auto edge : treeEdges){ 
 		int u = edge.first ;
 		int v = edge.second;
-		if(W.find({u,v}) != W.end())
+		if(W.find({u,v}) != W.end())	
 			computedStpVal += W[make_pair(u,v)];
-		else{
+		else{	// if not such uv-edge wegith is found in map
 			cout<< "WRONG: Non Existing Edge of G in T"<< endl;
 			return false;
 		}
@@ -255,8 +255,8 @@ int main(int argc, char **argv) {
 	while(cin >>  u >> v ){
 		//~ printf("%d %d\n",u, v);
 		treeEdges.push_back({u,v});
-		treeNodes.insert({u});
-		treeNodes.insert({v});
+		treeNodes.insert(u);
+		treeNodes.insert(v);
 	}
 	
 	if(stpVal == DEFAULT )
@@ -266,8 +266,8 @@ int main(int argc, char **argv) {
 		cout << "WRONG: No edges printed!" << endl;
 
 	if(treeEdges.size() != treeNodes.size()-1 ){
-		cout << "WRONG: Mismatch; n-1 != m" << endl;
-		DEBUG printf("WRONG: Mismatch; n-1 != m i.e %ld -1 != %ld\n", treeNodes.size(), treeEdges.size() );
+		//~ cout << "WRONG: Mismatch; n-1 != m" << endl;
+		printf("WRONG: Mismatch; n-1 != m i.e %ld -1 != %ld\n", treeNodes.size(), treeEdges.size() );
 	}
 	
 	if(! isTreeWeightAreSame(W, treeEdges, stpVal) )
